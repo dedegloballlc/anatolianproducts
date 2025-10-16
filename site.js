@@ -1,0 +1,1 @@
+function goAmazon(e){e.preventDefault();const q=document.getElementById('q').value.trim();if(!q)return false;window.open(`https://www.amazon.com/s?k=${encodeURIComponent(q)}&tag=YOURTAG-20`,'_blank');return false;}

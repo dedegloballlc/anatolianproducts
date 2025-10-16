@@ -1,0 +1,12 @@
+:root{--bg:#0b0f12;--fg:#e5e7eb;--muted:#94a3b8;--card:#0f172a;--ring:#60a5fa;--wrap:1100px;--radius:16px}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 16px}
+.hdr{background:rgba(15,23,42,.85);padding:12px 0}
+.brand{text-decoration:none;font-weight:700;color:var(--fg)}
+.nav a{margin-left:12px;text-decoration:none;color:var(--fg)}
+.hero{padding:48px 0;text-align:center}
+.btn{padding:12px 16px;border-radius:12px;border:1px solid var(--ring);background:none;color:var(--fg);cursor:pointer}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));margin:20px 0}
+.card{background:var(--card);padding:16px;border-radius:var(--radius)}
+.cta{display:inline-block;margin-top:8px;padding:10px 14px;border-radius:12px;border:1px solid var(--ring);text-decoration:none;color:var(--fg)}
+.ftr{border-top:1px solid rgba(148,163,184,.15);padding:12px;text-align:center;margin-top:24px}
