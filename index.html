@@ -1,31 +1,49 @@
-<!doctype html><html lang="tr">
+<!doctype html>
+<html lang="tr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Anatolian Products</title>
-<link rel="stylesheet" href="/site.css">
-<script defer src="/site.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Anatolian Products</title>
+  <meta name="description" content="TR, Balkan ve Ortadoğu odaklı seçki. Net tavsiye, tek tık.">
+  <link rel="stylesheet" href="/site.css">
+  <script defer src="/site.js"></script>
 </head>
 <body>
-<header class="top">
-  <div class="wrap">
-    <div class="brand">Anatolian Products</div>
-    <nav class="flags" id="flags" aria-label="Ülke bayrakları"></nav>
-  </div>
-</header>
-
-<main class="wrap">
-  <section class="stage">
-    <div class="product" id="product">
-      <div class="p-img" id="pImg" role="img" aria-label="Ürün görseli"></div>
-      <h1 class="p-title" id="pTitle">Ürün Başlığı</h1>
-      <a class="cta" id="pLink" href="#" target="_blank" rel="nofollow sponsored noopener">Gör</a>
+  <header class="top" role="banner">
+    <div class="wrap head" role="navigation" aria-label="Ülke bayrakları">
+      <a href="/" class="brand" aria-label="Anasayfa">Anatolian Products</a>
+      <div id="flags" class="flags" role="list"></div>
     </div>
-  </section>
-</main>
+  </header>
 
-<footer class="bottom">
-  <div class="wrap ticker" id="ticker" aria-live="polite"></div>
-</footer>
+  <main class="wrap main" id="main" role="main">
+    <section class="hero slim" aria-label="Tanıtım">
+      <div class="hero-copy">
+        <span class="kicker">Seçki</span>
+        <h1>Net tavsiye. Tek tık.</h1>
+      </div>
+    </section>
 
-</body></html>
+    <section id="searchbar" class="searchbar" aria-label="Arama" hidden>
+      <form id="searchForm" class="search" role="search" onsubmit="return window.APP.goSearch(event)">
+        <label for="q" class="sr-only">Google’da ara</label>
+        <input id="q" name="q" placeholder="Google’da ara…" autocomplete="off" inputmode="search" />
+        <button type="submit" class="btn">Google’da Ara</button>
+      </form>
+    </section>
+
+    <section class="stage" aria-label="Ürün">
+      <article class="product" id="product" aria-live="polite">
+        <div id="pImg" class="p-img" role="img" aria-label="Ürün görseli"></div>
+        <h2 id="pTitle" class="p-title">Ürün Başlığı</h2>
+        <a id="pLink" class="cta" href="#" target="_blank" rel="nofollow sponsored noopener" aria-label="Amazon’da gör">Amazon’da Gör</a>
+      </article>
+    </section>
+  </main>
+
+  <footer class="bottom" role="contentinfo">
+    <div id="ticker" class="wrap ticker thin" aria-live="polite"></div>
+  </footer>
+</body>
+</html>
