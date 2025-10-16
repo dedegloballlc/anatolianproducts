@@ -1,44 +1,34 @@
-<!doctype html><html lang="tr"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Anatolian Products — Öneri</title>
-<link rel="stylesheet" href="/site.css">
-<script defer src="/site.js"></script>
-</head><body class="dark">
-<header class="top">
-  <div class="wrap row between center">
-    <div class="brand">Anatolian Products</div>
-    <nav class="flags" aria-label="Bölgeler">
-      <button data-region="tr" title="Türkiye">🇹🇷</button>
-      <button data-region="balkan" title="Balkanlar">🇧🇦</button>
-      <button data-region="me" title="Ortadoğu">🇸🇦</button>
-    </nav>
-  </div>
-</header>
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Anatolian Products</title>
+  <link rel="stylesheet" href="/site.css" />
+  <script defer src="/site.js"></script>
+</head>
+<body>
+  <!-- ÜST: Balkan + Ortadoğu bayrakları -->
+  <header class="top">
+    <div class="wrap flags" id="flagRow" aria-label="Bölgeler"></div>
+  </header>
 
-<main class="wrap">
-  <section class="hero">
-     <div class="hero-copy">
-       <span class="kicker">Seçki</span>
-       <h1>Net tavsiye. Tek tık.</h1>
-       <p class="muted">Türkiye, Balkanlar ve Ortadoğu’dan küratörlü ürün.</p>
-     </div>
-  </section>
-
-  <section class="featured" id="featured">
-    <h2 class="section-title">Günün Ürünü</h2>
-    <div class="product" id="product">
-      <div class="p-img skel"></div>
-      <div class="p-meta">
-        <div class="p-cat" id="pCat">Kategori</div>
-        <h3 class="p-title" id="pTitle">Ürün adı</h3>
-        <a class="cta" id="pLink" href="#" target="_blank" rel="nofollow sponsored noopener">Amazon’da Gör</a>
+  <!-- ORTA: Tek ürün alanı -->
+  <main class="wrap">
+    <section class="hero">
+      <div id="heroImg" class="hero-img"></div>
+      <div class="hero-meta">
+        <div id="pCat" class="kicker">Kategori</div>
+        <h1 id="pTitle">Ürün adı</h1>
+        <a id="pLink" class="cta" href="#" target="_blank" rel="nofollow sponsored noopener">Görüntüle</a>
       </div>
-    </div>
-    <p class="note muted">Disclosure: Amazon Associate olarak uygun alışverişlerden gelir elde ederim.</p>
-  </section>
-</main>
+    </section>
+    <p class="disclosure">As an Amazon Associate I earn from qualifying purchases.</p>
+  </main>
 
-<footer class="bottom">
-  <div class="wrap ticker" id="ticker" aria-live="polite"></div>
-</footer>
-</body></html>
+  <!-- ALT: Ülke saatleri (canlı) -->
+  <footer class="bottom">
+    <div id="ticker" class="wrap ticker" aria-live="polite"></div>
+  </footer>
+</body>
+</html>
