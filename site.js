@@ -1,37 +1,86 @@
-const REGIONS={tr:['İstanbul','Ankara'],balkan:['Saraybosna','Belgrad'],me:['Riyad','Dubai','Kahire']};
-sabit TICK=document.getElementById('ticker');
-sabit bayraklar=belge.querySelectorAll('.bayraklar düğmesi');
-bayraklar.forEach(b=>b.addEventListener('tıkla',()=>işlemeSaati(b.dataset.region)));
-fonksiyon bölgesi(şehir){
-  const Z={'İstanbul':'Avrupa/İstanbul','Ankara':'Avrupa/İstanbul','Saraybosna':'Avrupa/Saraybosna',
-           'Belgrad':'Avrupa/Belgrad','Riyad':'Asya/Riyad','Dubai':'Asya/Dubai','Kahire':'Afrika/Kahire'};
-  Z[şehir]||'UTC'yi döndür;
-}
-fonksiyon renderClock(bölge='tr'){
-  TICK.innerHTML='';
-  (BÖLGELER[bölge]||BÖLGELER.tr).forEach(c=>{
-    sabit el=belge.oluşturElement('span');el.sınıfAdı='tick';el.dataset.city=c;TİC.appendChild(el);
+// Regions: ALL Balkan and Middle Eastern countries with capitals + IANA time zones
+const BALKANS = [
+  {name:"Albania", flag:"🇦🇱", capital:"Tiranë", tz:"Europe/Tirane"},
+  {name:"Bosnia and Herzegovina", flag:"🇧🇦", capital:"Saraybosna", tz:"Europe/Sarajevo"},
+  {name:"Bulgaria", flag:"🇧🇬", capital:"Sofya", tz:"Europe/Sofia"},
+  {name:"Croatia", flag:"🇭🇷", capital:"Zagreb", tz:"Europe/Zagreb"},
+  {name:"Greece", flag:"🇬🇷", capital:"Atina", tz:"Europe/Athens"},
+  {name:"Kosovo", flag:"🇽🇰", capital:"Priştine", tz:"Europe/Belgrade"},
+  {name:"Montenegro", flag:"🇲🇪", capital:"Podgorica", tz:"Europe/Podgorica"},
+  {name:"North Macedonia", flag:"🇲🇰", capital:"Üsküp", tz:"Europe/Skopje"},
+  {name:"Romania", flag:"🇷🇴", capital:"Bükreş", tz:"Europe/Bucharest"},
+  {name:"Serbia", flag:"🇷🇸", capital:"Belgrad", tz:"Europe/Belgrade"},
+  {name:"Slovenia", flag:"🇸🇮", capital:"Ljubljana", tz:"Europe/Ljubljana"}
+];
+const MIDDLE_EAST = [
+  {name:"Türkiye", flag:"🇹🇷", capital:"İstanbul", tz:"Europe/Istanbul"},
+  {name:"Saudi Arabia", flag:"🇸🇦", capital:"Riyad", tz:"Asia/Riyadh"},
+  {name:"United Arab Emirates", flag:"🇦🇪", capital:"Abu Dhabi", tz:"Asia/Dubai"},
+  {name:"Qatar", flag:"🇶🇦", capital:"Doha", tz:"Asia/Qatar"},
+  {name:"Bahrain", flag:"🇧🇭", capital:"Manama", tz:"Asia/Bahrain"},
+  {name:"Kuwait", flag:"🇰🇼", capital:"Kuveyt", tz:"Asia/Kuwait"},
+  {name:"Oman", flag:"🇴🇲", capital:"Maskat", tz:"Asia/Muscat"},
+  {name:"Yemen", flag:"🇾🇪", capital:"Sana", tz:"Asia/Aden"},
+  {name:"Iraq", flag:"🇮🇶", capital:"Bağdat", tz:"Asia/Baghdad"},
+  {name:"Iran", flag:"🇮🇷", capital:"Tahran", tz:"Asia/Tehran"},
+  {name:"Jordan", flag:"🇯🇴", capital:"Amman", tz:"Asia/Amman"},
+  {name:"Lebanon", flag:"🇱🇧", capital:"Beyrut", tz:"Asia/Beirut"},
+  {name:"Syria", flag:"🇸🇾", capital:"Şam", tz:"Asia/Damascus"},
+  {name:"Israel", flag:"🇮🇱", capital:"Tel Aviv", tz:"Asia/Jerusalem"},
+  {name:"Palestine", flag:"🇵🇸", capital:"Ramallah", tz:"Asia/Hebron"},
+  {name:"Egypt", flag:"🇪🇬", capital:"Kahire", tz:"Africa/Cairo"},
+  {name:"Cyprus", flag:"🇨🇾", capital:"Lefkoşa", tz:"Asia/Nicosia"}
+];
+const ALL = [...MIDDLE_EAST, ...BALKANS];
+
+// Top: render all flags
+const flagsEl = document.getElementById('flags');
+ALL.forEach(c=>{
+  const span=document.createElement('span');
+  span.className='flag';
+  span.title = `${c.name} · ${c.capital}`;
+  span.textContent=c.flag;
+  flagsEl.appendChild(span);
+});
+
+// Bottom: live ticker of times for each capital
+const ticker=document.getElementById('ticker');
+function drawTicker(){
+  ticker.innerHTML='';
+  ALL.forEach(c=>{
+    const t=document.createElement('span');
+    t.className='tick';
+    const now = new Date().toLocaleString('tr-TR',{timeZone:c.tz,hour:'2-digit',minute:'2-digit'});
+    t.textContent = `${c.capital} • ${now}`;
+    ticker.appendChild(t);
   });
-  güncellemeZamanları(); if(window._clk) clearInterval(window._clk); window._clk=setInterval(güncellemeZamanları,20*1000);
 }
-fonksiyon güncellemeZamanları(){
-  belge.querySelectorAll('.tick').forEach(el=>{
-    sabit şehir=el.dataset.city;
-    sabit zaman=yeni Date().toLocaleString('tr-TR',{saatZone:zone(şehir),saat:'2-haneli',dakika:'2-haneli'});
-    el.textContent=`${şehir} • ${zaman}`;
-  });
-}
-asenkron fonksiyon loadProduct(){
-  denemek{
+drawTicker();
+setInterval(drawTicker, 30000); // update every 30s
+
+// Center: single product rotating every 5s from products.json
+let products=[], idx=0;
+async function loadProducts(){
+  try{
     const res=await fetch('/products.json',{cache:'no-cache'});
-    sabit veri=await res.json();
-    sabit p=(veri&&veri[0])||null;
-    eğer(!p) geri dön;
-    document.querySelector('#pTitle').textContent=p.title||'Ürün';
-    document.querySelector('#pCat').textContent=p.category||'Öneri';
-    belge.querySelector('#pLink').href=p.url;
-    sabit img=belge.sorguSeçici('.p-img');
-    eğer(p.image) img.style.backgroundImage=`url('${p.image}')`;
-  }catch(e){console.warn('products.json okunamadı',e)}
+    products = await res.json();
+  }catch(e){ products=[]; }
+  if(!Array.isArray(products) || products.length===0){
+    products=[{title:'Örnek Ürün', url:'#', image:'',}];
+  }
+  showProduct(0);
+  setInterval(()=>{
+    idx=(idx+1)%products.length;
+    showProduct(idx);
+  }, 5000);
 }
-renderClock('tr'); loadProduct();
+function showProduct(i){
+  const p=products[i];
+  const t=document.getElementById('pTitle');
+  const l=document.getElementById('pLink');
+  const img=document.getElementById('pImg');
+  t.textContent=p.title||'Ürün';
+  l.href=p.url||'#';
+  img.style.backgroundImage = p.image ? `url('${p.image}')` : 'none';
+}
+loadProducts();

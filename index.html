@@ -1,34 +1,31 @@
-<!doctype html>
-<html lang="tr">
+<!doctype html><html lang="tr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Anatolian Products</title>
-  <link rel="stylesheet" href="/site.css" />
-  <script defer src="/site.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Anatolian Products</title>
+<link rel="stylesheet" href="/site.css">
+<script defer src="/site.js"></script>
 </head>
 <body>
-  <!-- ÜST: Balkan + Ortadoğu bayrakları -->
-  <header class="top">
-    <div class="wrap flags" id="flagRow" aria-label="Bölgeler"></div>
-  </header>
+<header class="top">
+  <div class="wrap">
+    <div class="brand">Anatolian Products</div>
+    <nav class="flags" id="flags" aria-label="Ülke bayrakları"></nav>
+  </div>
+</header>
 
-  <!-- ORTA: Tek ürün alanı -->
-  <main class="wrap">
-    <section class="hero">
-      <div id="heroImg" class="hero-img"></div>
-      <div class="hero-meta">
-        <div id="pCat" class="kicker">Kategori</div>
-        <h1 id="pTitle">Ürün adı</h1>
-        <a id="pLink" class="cta" href="#" target="_blank" rel="nofollow sponsored noopener">Görüntüle</a>
-      </div>
-    </section>
-    <p class="disclosure">As an Amazon Associate I earn from qualifying purchases.</p>
-  </main>
+<main class="wrap">
+  <section class="stage">
+    <div class="product" id="product">
+      <div class="p-img" id="pImg" role="img" aria-label="Ürün görseli"></div>
+      <h1 class="p-title" id="pTitle">Ürün Başlığı</h1>
+      <a class="cta" id="pLink" href="#" target="_blank" rel="nofollow sponsored noopener">Gör</a>
+    </div>
+  </section>
+</main>
 
-  <!-- ALT: Ülke saatleri (canlı) -->
-  <footer class="bottom">
-    <div id="ticker" class="wrap ticker" aria-live="polite"></div>
-  </footer>
-</body>
-</html>
+<footer class="bottom">
+  <div class="wrap ticker" id="ticker" aria-live="polite"></div>
+</footer>
+
+</body></html>
