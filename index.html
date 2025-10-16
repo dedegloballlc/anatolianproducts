@@ -1,36 +1,44 @@
 <!doctype html><html lang="tr"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Anatolian Products — Seçilmiş Ortadoğu & Anadolu Ürünleri</title>
-<meta name="description" content="Küratörlü Ortadoğu ve Anadolu ürünleri. Hızlı öneri, tek tıkla Amazon.">
-<link rel="stylesheet" href="/site.css"><script defer src="/site.js"></script>
-</head><body>
-<header class="hdr"><div class="wrap row between center">
-  <a class="brand" href="/">Anatolian Products</a>
-  <nav class="nav">
-    <a href="/kahve-cay.html">Kahve & Çay</a>
-    <a href="/mutfak.html">Mutfak</a>
-    <a href="/saglik.html">Sağlık</a>
-    <a href="/firsatlar.html">Fırsatlar</a>
-    <a href="/about.html">Hakkında</a>
-  </nav>
-</div></header>
-<section class="hero">
-  <div class="wrap">
-    <h1>Seçilmiş ürün. Net tavsiye. Tek tık.</h1>
-    <p class="muted">Ortadoğu ve Anadolu lezzetlerini güvenilir markalardan topluyoruz.</p>
-    <form class="search" onsubmit="return goAmazon(event)">
-      <input id="q" aria-label="Ara" placeholder="Amazon’da ara… Türk kahvesi, cezve, baharat…" />
-      <button class="btn" type="submit">Amazon’da Ara</button>
-    </form>
+<title>Anatolian Products — Öneri</title>
+<link rel="stylesheet" href="/site.css">
+<script defer src="/site.js"></script>
+</head><body class="dark">
+<header class="top">
+  <div class="wrap row between center">
+    <div class="brand">Anatolian Products</div>
+    <nav class="flags" aria-label="Bölgeler">
+      <button data-region="tr" title="Türkiye">🇹🇷</button>
+      <button data-region="balkan" title="Balkanlar">🇧🇦</button>
+      <button data-region="me" title="Ortadoğu">🇸🇦</button>
+    </nav>
   </div>
-</section>
+</header>
+
 <main class="wrap">
-  <h2>Bugünün Önerileri</h2>
-  <div class="grid">
-    <article class="card"><h3>Türk Kahvesi</h3><p>Dengeli içim • Taze kavrum</p><a class="cta" href="https://www.amazon.com/dp/ASIN1?tag=YOURTAG-20" target="_blank">Amazon’da Gör</a></article>
-    <article class="card"><h3>Bakır Cezve</h3><p>El işi • Kalın taban</p><a class="cta" href="https://www.amazon.com/dp/ASIN2?tag=YOURTAG-20" target="_blank">Amazon’da Gör</a></article>
-  </div>
-  <p class="muted">As an Amazon Associate I earn from qualifying purchases.</p>
+  <section class="hero">
+     <div class="hero-copy">
+       <span class="kicker">Seçki</span>
+       <h1>Net tavsiye. Tek tık.</h1>
+       <p class="muted">Türkiye, Balkanlar ve Ortadoğu’dan küratörlü ürün.</p>
+     </div>
+  </section>
+
+  <section class="featured" id="featured">
+    <h2 class="section-title">Günün Ürünü</h2>
+    <div class="product" id="product">
+      <div class="p-img skel"></div>
+      <div class="p-meta">
+        <div class="p-cat" id="pCat">Kategori</div>
+        <h3 class="p-title" id="pTitle">Ürün adı</h3>
+        <a class="cta" id="pLink" href="#" target="_blank" rel="nofollow sponsored noopener">Amazon’da Gör</a>
+      </div>
+    </div>
+    <p class="note muted">Disclosure: Amazon Associate olarak uygun alışverişlerden gelir elde ederim.</p>
+  </section>
 </main>
-<footer class="ftr"><div class="wrap muted">© 2025 Anatolian Products</div></footer>
+
+<footer class="bottom">
+  <div class="wrap ticker" id="ticker" aria-live="polite"></div>
+</footer>
 </body></html>
