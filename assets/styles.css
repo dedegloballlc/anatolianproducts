@@ -1,78 +1,56 @@
 :root{
-  --bg:#0b0d10; --bg-soft:#11151a; --card:#141a20; --text:#d6dde5; --muted:#8b98a7;
-  --accent:#2ea6ff; --rim:12px; --shadow:0 8px 30px rgba(0,0,0,.35);
-  --chip:#1b232c; --chip-border:#24303c; --dur:35s;
+  --bg:#0b0d10;
+  --bg-soft:#11151a;
+  --card:#141a20;
+  --text:#d6dde5;
+  --muted:#8b98a7;
+  --accent:#2ea6ff;
+  --rim:12px;
+  --shadow:0 8px 30px rgba(0,0,0,.35);
+  --chip:#1b232c;
+  --chip-border:#24303c;
+  --dur:35s;
 }
 
-/* Reset */
 *{box-sizing:border-box}
 html,body{height:100%}
 html{scroll-behavior:smooth}
 body{
-  margin:0; font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+  margin:0;
+  font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
   color:var(--text);
-  background:
-    radial-gradient(1000px 600px at 15% -10%, #151b22 0, transparent 60%),
-    var(--bg);
+  background:radial-gradient(1000px 600px at 15% -10%, #151b22 0, transparent 60%), var(--bg);
 }
 
-/* Snow */
-#snow{position:fixed; inset:0; pointer-events:none; overflow:hidden}
-#snow i{position:absolute; top:-10px; background:#fff; border-radius:50%; opacity:.9;
-  animation:fall var(--flake-dur,15s) linear infinite}
-@keyframes fall{to{transform:translate3d(0,110vh,0)}}
+#snow{ position:fixed; inset:0; pointer-events:none; overflow:hidden }
+#snow i{ position:absolute; top:-10px; background:#fff; border-radius:50%; opacity:.9; animation:fall var(--flake-dur,15s) linear infinite }
+@keyframes fall{ to{ transform:translate3d(0,110vh,0) } }
 
-/* Top/Bottom marquees */
-.bar{position:sticky; top:0; z-index:2; background:rgba(17,21,26,.6);
-  backdrop-filter:saturate(120%) blur(6px); border-bottom:1px solid #1e2731}
-.bar-bottom{position:fixed; bottom:0; top:auto; border-top:1px solid #1e2731; border-bottom:none}
-.track{display:flex; gap:8px; padding:6px 8px; min-height:34px; overflow:hidden;
-  mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
-.track a{display:inline-flex; align-items:center; gap:8px; padding:6px 10px;
-  background:var(--chip); border:1px solid var(--chip-border); border-radius:999px;
-  color:var(--text); text-decoration:none; white-space:nowrap; font-weight:500;
-  transition:transform .15s ease, filter .15s ease}
-.track a:hover{transform:translateY(-1px); filter:brightness(1.1)}
-.track>*{animation:scroll var(--dur) linear infinite}
-.track>*:nth-child(odd){animation-delay:calc(var(--dur)/-2)}
-@keyframes scroll{from{transform:translateX(0)} to{transform:translateX(-50%)}}
+.bar{ position:sticky; top:0; z-index:2; background:rgba(17,21,26,.6); backdrop-filter:saturate(120%) blur(6px); border-bottom:1px solid #1e2731 }
+.bar-bottom{ position:fixed; bottom:0; top:auto; border-top:1px solid #1e2731; border-bottom:none }
+.track{ display:flex; gap:8px; padding:6px 8px; min-height:36px; overflow:hidden; mask-image:linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent) }
+.track a{ display:inline-flex; align-items:center; gap:8px; padding:6px 10px; background:var(--chip); border:1px solid var(--chip-border); border-radius:999px; color:var(--text); text-decoration:none; white-space:nowrap; font-weight:500; transition:transform .15s ease, filter .15s ease }
+.track a:hover{ transform:translateY(-1px); filter:brightness(1.1) }
+.track{ --x:0 }
+.track> *{ animation:scroll var(--dur) linear infinite }
+.track> *:nth-child(odd){ animation-delay:calc(var(--dur)/-2) }
+@keyframes scroll{ from{ transform:translateX(0) } to{ transform:translateX(-50%) } }
 
-/* Layout */
-main{min-height:100vh; display:grid; place-items:center; padding:64px 16px 76px}
+main{ display:grid; place-items:center; padding:64px 16px 76px; min-height:100vh }
+.card{ width:min(880px,92vw); background:var(--card); border:1px solid #1e2731; border-radius:var(--rim); box-shadow:var(--shadow); overflow:hidden }
+.media{ aspect-ratio:16/9; background:#0f141a; display:grid; place-items:center }
+.media img{ width:100%; height:100%; object-fit:cover }
+.body{ padding:18px 18px 14px }
+.title{ font-size:22px; margin:0 0 8px }
+.price-row{ display:flex; gap:12px; align-items:center; margin:8px 0 10px }
+.price{ font-weight:700; font-size:18px }
+.btn{ margin-left:auto; background:linear-gradient(180deg, #ffd38a, #ffb13b); color:#1b1200; font-weight:700; border-radius:10px; padding:9px 14px; text-decoration:none; border:1px solid #ec9a23; box-shadow:0 2px 0 #d48312 inset, 0 8px 20px rgba(0,0,0,.35) }
+.btn:hover{ filter:brightness(1.05) }
+.note{ color:var(--muted); font-size:12px; margin:0 }
 
-/* Product card — compact, centered */
-.product-wrap{display:grid; place-items:center; width:100%; padding:24px 12px}
-.product-card{
-  width:min(420px,92vw);
-  background:var(--card);
-  border:1px solid #1e2731;
-  border-radius:16px;
-  box-shadow:var(--shadow);
-  overflow:hidden;
-}
-
-/* Media (match your HTML: .media-frame > img.product-media) */
-.media-frame{width:100%; aspect-ratio:4/3; background:#0f141a; overflow:hidden; display:block}
-.product-media{width:100%; height:100%; object-fit:cover; display:block}
-
-/* Texts + CTA */
-.body{padding:16px 16px 14px}
-.title{font-size:20px; margin:0 0 8px}
-.price-row{display:flex; gap:12px; align-items:center; margin:8px 0 10px}
-.price{font-weight:700; font-size:18px}
-.btn{
-  margin-left:auto; background:linear-gradient(180deg,#ffd38a,#ffb13b);
-  color:#1b1200; font-weight:700; border-radius:10px; padding:9px 14px;
-  text-decoration:none; border:1px solid #ec9a23;
-  box-shadow:0 2px 0 #d48312 inset, 0 8px 20px rgba(0,0,0,.35)
-}
-.btn:hover{filter:brightness(1.05)}
-.note{color:var(--muted); font-size:12px; margin:0}
-
-/* Small screens */
 @media (max-width:480px){
-  .title{font-size:18px}
-  .price{font-size:16px}
-  .btn{padding:8px 12px}
-  .product-card{max-width:360px}
+  .title{ font-size:18px }
+  .price{ font-size:16px }
+  .btn{ padding:8px 12px }
+  .track{ min-height:34px }
 }
