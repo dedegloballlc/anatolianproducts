@@ -11,7 +11,7 @@ function hue(i){ return (i*37)%360; }
   const track = $('#flagsTrack'); if(!track) return;
   const make = () => COUNTRIES.map(c => {
     const a = h('a','flag-link');
-    a.href = 'https://www.google.com/search?q=' + encodeURIComponent(c.query);
+a.href = 'https://www.amazon.com/sp?ie=UTF8&seller=A2CJDBZTAQF6VN&asin=B0FLLQCFZ5&ref_=dp_merchant_link&isAmazonFulfilled=1';
     a.target = '_blank'; a.rel = 'noopener noreferrer';
     a.innerHTML = '<span style="font-size:18px">'+c.flag+'</span><span>'+c.name+'</span>';
     return a;
