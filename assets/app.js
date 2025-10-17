@@ -113,5 +113,16 @@ document.getElementById('product-schema').textContent = JSON.stringify({
     s.style.setProperty('--dur', dur+'s');
     s.style.animationDelay = (-Math.random()*dur)+'s';
     root.appendChild(s);
-  }
+  }// Tek ürün bağlama
+const PRODUCT = {
+  title: 'Turkish Flag Car Air Freshener',
+  img: 'assets/products/1.jpg',
+  price: '19.99',
+  url: 'https://www.amazon.com/Turkish-Flag-Car-Air-Freshener/dp/B0FLLQCFZ5'
+};
+document.getElementById('productTitle').textContent = PRODUCT.title;
+document.getElementById('productPrice').textContent = '$' + Number(PRODUCT.price).toFixed(2);
+document.getElementById('productImage').src = PRODUCT.img;
+document.getElementById('productLink').href = PRODUCT.url;
+
 })();
