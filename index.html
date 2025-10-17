@@ -13,24 +13,27 @@
   <script type="application/ld+json" id="product-schema"></script>
 </head>
 <body>
-  <div class="snow" id="snow"></div>
-  <header><div class="marquee top"><div class="track" id="flagsTrack"></div></div></header>
-  <main>
-    <section class="product-wrap">
-      <article class="product-card" id="product">
-        <div class="media-frame"><img id="productImage" class="product-media" alt="Ürün görseli" loading="lazy" /></div>
-        <div class="product-body">
-          <h1 id="productTitle" class="product-title"></h1>
-          <div class="price-line">
-            <span id="productPrice" class="product-price"></span>
-            <a id="productLink" class="btn" target="_blank" rel="noopener noreferrer">Amazon'da Gör</a>
-          </div>
-          <p class="muted note">Fiyat URL parametresi veya sabit ile gösterilir. Amazon canlı fiyatı için resmi API gerekir.</p>
-        </div>
-      </article>
-    </section>
-  </main>
-  <footer><div class="marquee thin"><div class="track" id="clocksTrack"></div></div></footer>
-<script src="assets/app.js?v=9" defer></script>
+  <div id="snow"></div>
+
+<header class="marquee top">
+  <div class="track" id="flagsTrack"></div>
+</header>
+
+<section class="product-wrap">
+  <article class="product-card" id="product">
+    <div class="media-frame">
+      <img id="productImage" class="product-media" alt="Ürün görseli" loading="lazy" />
+    </div>
+    <h1 id="productTitle" class="product-title"></h1>
+    <div class="price-line"><span id="productPrice"></span></div>
+    <a id="productLink" class="btn" target="_blank" rel="noopener noreferrer">Amazon'da Gör</a>
+  </article>
+</section>
+
+<footer class="marquee thin">
+  <div class="track" id="clocksTrack"></div>
+</footer>
+
+<script src="assets/app.js?v=19" defer></script>
 </body>
 </html>
