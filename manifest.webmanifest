@@ -1,8 +1,1 @@
-{
-  "name": "Anatolian Products",
-  "short_name": "Anatolian",
-  "start_url": ".",
-  "display": "standalone",
-  "background_color": "#0a0d12",
-  "theme_color": "#0a0d12"
-}
+{"name": "Anatolian Products", "short_name": "Anatolia", "start_url": "/", "display": "standalone", "theme_color": "#0a0a0a", "background_color": "#0a0a0a", "icons": [{"src": "assets/favicon.svg", "sizes": "64x64", "type": "image/svg+xml"}]}
