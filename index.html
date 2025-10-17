@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dede Global LLC — Tanıtım Sayfası</title>
+  <meta name="description" content="Ülke bayrakları, canlı saatler ve tek ürün vitrinli yönlendirme sayfası." />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <div class="snow" id="snow"></div>
+
+  <header>
+    <div class="nav">
+      <div class="brand">Dede Global LLC</div>
+      <div class="flags" id="flags"></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="product-card" id="product">
+      <img id="productImage" class="product-media" alt="Ürün görseli" />
+      <div class="product-body">
+        <h3 id="productTitle" class="product-title"></h3>
+        <p id="productPrice" class="product-price"></p>
+        <div class="product-actions">
+          <a id="productLink" class="btn" target="_blank" rel="noopener noreferrer">Amazon'da Gör</a>
+        </div>
+        <p class="muted note">Not: Canlı Amazon fiyatı için API gerekir. Bu sürüm URL parametresi veya sabit ile gösterir.</p>
+      </div>
+    </section>
+
+    <details>
+      <summary>⚙️ Hızlı yapılandırma • Quick setup</summary>
+      <div class="help">
+        <p>URL parametreleri: <code>?title=Ad&price=24.90&img=IMG_URL&url=AMAZON_LINK</code></p>
+        <p>Varsayılanları <code>assets/app.js</code> içindeki <code>PRODUCT</code> nesnesinden değiştirin.</p>
+      </div>
+    </details>
+  </main>
+
+  <footer>
+    <div class="clocks" id="clocks"></div>
+  </footer>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>
