@@ -54,3 +54,7 @@ main{ display:grid; place-items:center; padding:64px 16px 76px; min-height:100vh
   .btn{ padding:8px 12px }
   .track{ min-height:34px }
 }
+/* Product card: center + smaller */
+.product-wrap { display:grid; place-content:center; padding:24px 12px; }
+.product-card { max-width: 460px; width:100%; margin:0 auto; }
+.product-media { width:100%; height:auto; object-fit:cover; border-radius:14px; }
