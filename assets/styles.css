@@ -24,20 +24,3 @@ main{max-width:1100px;margin:40px auto 120px;padding:0 18px;position:relative;z-
 .snow{position:fixed;inset:0;pointer-events:none;z-index:0}
 .snow i{position:absolute;top:-10px;width:3px;height:3px;background:#fff;border-radius:50%;opacity:.85;animation:fall linear var(--dur) infinite;left:var(--x);filter:blur(.25px)}
 @keyframes fall{to{transform:translate3d(0,100vh,0) rotate(360deg)}}
-/* --- Amazon linkine giden saat çipleri için --- */
-.clock { 
-  text-decoration: none;      /* alt çizgi yok */
-  font-weight: 500;
-  padding: 6px 10px;          /* ince çip */
-  border-radius: 10px;
-}
-
-.clock:hover { 
-  filter: brightness(1.15);
-  transform: translateY(-1px);
-}
-
-/* Alt şeridi biraz daha ince göster */
-.marquee.thin .track { 
-  padding: 6px 12px;
-}
