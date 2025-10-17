@@ -1,98 +1,91 @@
-// == Promo app ==
+const AMAZON_URL = "https://www.amazon.com/sp?ie=UTF8&seller=A2CJDBZTAQF6VN&asin=B0FLLQCFZ5&ref_=dp_merchant_link&isAmazonFulfilled=1";
 
-// Global Amazon URL for all clicks
-const TARGET_URL = "https://www.amazon.com/sp?ie=UTF8&seller=A2CJDBZTAQF6VN&asin=B0FLLQCFZ5&ref_=dp_merchant_link&isAmazonFulfilled=1";
-
-// Countries (native names, no Israel)
 const COUNTRIES = [
-  {name:'Türkiye', flag:'🇹🇷', query:'Türkiye', tz:'Europe/Istanbul'},
-  {name:'Ελλάδα', flag:'🇬🇷', query:'Greece', tz:'Europe/Athens'},
-  {name:'България', flag:'🇧🇬', query:'Bulgaria', tz:'Europe/Sofia'},
-  {name:'Србија', flag:'🇷🇸', query:'Serbia', tz:'Europe/Belgrade'},
-  {name:'Bosna i Hercegovina', flag:'🇧🇦', query:'Bosnia and Herzegovina', tz:'Europe/Sarajevo'},
-  {name:'Shqipëria', flag:'🇦🇱', query:'Albania', tz:'Europe/Tirane'},
-  {name:'Северна Македонија', flag:'🇲🇰', query:'North Macedonia', tz:'Europe/Skopje'},
-  {name:'România', flag:'🇷🇴', query:'Romania', tz:'Europe/Bucharest'},
-  {name:'ایران', flag:'🇮🇷', query:'Iran', tz:'Asia/Tehran'},
-  {name:'العراق', flag:'🇮🇶', query:'Iraq', tz:'Asia/Baghdad'},
-  {name:'سوريا', flag:'🇸🇾', query:'Syria', tz:'Asia/Damascus'},
-  {name:'لبنان', flag:'🇱🇧', query:'Lebanon', tz:'Asia/Beirut'},
-  {name:'الأردن', flag:'🇯🇴', query:'Jordan', tz:'Asia/Amman'},
-  {name:'السعودية', flag:'🇸🇦', query:'Saudi Arabia', tz:'Asia/Riyadh'},
-  {name:'الإمارات', flag:'🇦🇪', query:'United Arab Emirates', tz:'Asia/Dubai'},
-  {name:'قطر', flag:'🇶🇦', query:'Qatar', tz:'Asia/Qatar'},
-  {name:'الكويت', flag:'🇰🇼', query:'Kuwait', tz:'Asia/Kuwait'},
-  {name:'عُمان', flag:'🇴🇲', query:'Oman', tz:'Asia/Muscat'},
-  {name:'البحرين', flag:'🇧🇭', query:'Bahrain', tz:'Asia/Bahrain'},
-  {name:'مصر', flag:'🇪🇬', query:'Egypt', tz:'Africa/Cairo'}
+  {name:'Türkiye', flag:'🇹🇷', tz:'Europe/Istanbul'},
+  {name:'Ελλάδα', flag:'🇬🇷', tz:'Europe/Athens'},
+  {name:'България', flag:'🇧🇬', tz:'Europe/Sofia'},
+  {name:'Србија', flag:'🇷🇸', tz:'Europe/Belgrade'},
+  {name:'Bosna i Hercegovina', flag:'🇧🇦', tz:'Europe/Sarajevo'},
+  {name:'Shqipëria', flag:'🇦🇱', tz:'Europe/Tirane'},
+  {name:'Северна Македонија', flag:'🇲🇰', tz:'Europe/Skopje'},
+  {name:'România', flag:'🇷🇴', tz:'Europe/Bucharest'},
+  {name:'ایران', flag:'🇮🇷', tz:'Asia/Tehran'},
+  {name:'العراق', flag:'🇮🇶', tz:'Asia/Baghdad'},
+  {name:'سوريا', flag:'🇸🇾', tz:'Asia/Damascus'},
+  {name:'لبنان', flag:'🇱🇧', tz:'Asia/Beirut'},
+  {name:'الأردن', flag:'🇯🇴', tz:'Asia/Amman'},
+  {name:'السعودية', flag:'🇸🇦', tz:'Asia/Riyadh'},
+  {name:'الإمارات', flag:'🇦🇪', tz:'Asia/Dubai'},
+  {name:'قطر', flag:'🇶🇦', tz:'Asia/Qatar'},
+  {name:'الكويت', flag:'🇰🇼', tz:'Asia/Kuwait'},
+  {name:'عُمان', flag:'🇴🇲', tz:'Asia/Muscat'},
+  {name:'البحرين', flag:'🇧🇭', tz:'Asia/Bahrain'},
+  {name:'مصر', flag:'🇪🇬', tz:'Africa/Cairo'}
 ];
 
-// Helpers
 const $ = s => document.querySelector(s);
-const h = (t,c) => { const e=document.createElement(t); if(c) e.className=c; return e; };
-const setMarqueeDuration = (track, speed=90) => {
+const el = (t,c) => { const e=document.createElement(t); if(c) e.className=c; return e; };
+const setMarquee = (track, speed=90) => {
+  if(!track) return;
+  const kids = [...track.children];
+  kids.forEach(k => track.appendChild(k.cloneNode(true)));
   const half = track.scrollWidth/2;
   const dur = Math.max(18, Math.round(half/speed));
   track.style.setProperty('--dur', dur+'s');
 };
-const colorFor = i => `hsl(${(i*37)%360} 70% 55%)`;
 
-// Top flags marquee
 (function buildFlags(){
-  const track = $('#flagsTrack'); if(!track) return;
-  const make = () => COUNTRIES.map(c => {
-    const a = h('a','flag-link');
-    a.href = TARGET_URL;
-    a.target = '_blank'; a.rel = 'noopener noreferrer';
-    a.innerHTML = '<span style="font-size:18px">'+c.flag+'</span><span>'+c.name+'</span>';
-    return a;
+  const t = $('#flagsTrack'); if(!t) return;
+  COUNTRIES.forEach(c => {
+    const a = el('a'); a.href = AMAZON_URL; a.target = '_blank'; a.rel = 'noopener noreferrer';
+    a.innerHTML = `<span style="font-size:18px">${c.flag}</span><span>${c.name}</span>`;
+    t.appendChild(a);
   });
-  const one = make(), two = make();
-  [...one, ...two].forEach(n => track.appendChild(n));
-  requestAnimationFrame(()=> setMarqueeDuration(track, 110));
+  setMarquee(t, 110);
 })();
 
-// Bottom clocks marquee
 const clocksTrack = $('#clocksTrack');
 function renderClocks(){
   if(!clocksTrack) return;
-  const make = () => COUNTRIES.map((c,i)=>{
+  clocksTrack.innerHTML='';
+  COUNTRIES.forEach((c)=>{
     const now = new Date();
     const t = new Intl.DateTimeFormat('tr-TR',{hour:'2-digit',minute:'2-digit',hour12:false,timeZone:c.tz}).format(now);
-    const a = h('a','clock');
-    a.href = TARGET_URL; a.target = '_blank'; a.rel = 'noopener noreferrer';
-    a.style.color = colorFor(i);
-    a.textContent = `${c.flag} ${c.name}: ${t}`;
-    return a;
+    const a = el('a'); a.href = AMAZON_URL; a.target='_blank'; a.rel='noopener noreferrer';
+    a.textContent = `${c.flag} ${c.name} • ${t}`;
+    clocksTrack.appendChild(a);
   });
-  clocksTrack.innerHTML = '';
-  const one = make(), two = make();
-  [...one, ...two].forEach(n => clocksTrack.appendChild(n));
-  requestAnimationFrame(()=> setMarqueeDuration(clocksTrack, 90));
+  setMarquee(clocksTrack, 90);
 }
 renderClocks();
 setInterval(renderClocks, 30000);
 
-// Product card with URL override
-const PRODUCT_DEFAULT = {
-  title:'Turkish Flag Car Air Freshener',
-  price:'19.99',
-  img:'assets/products/1.jpg',
-  url:'https://www.amazon.com/Turkish-Flag-Car-Air-Freshener/dp/B0FLLQCFZ5'
-};
-const params = new URLSearchParams(location.search);
-const PRODUCT = {
-  title: params.get('title') || PRODUCT_DEFAULT.title,
-  price: params.get('price') || PRODUCT_DEFAULT.price,
-  img: params.get('img') || PRODUCT_DEFAULT.img,
-  url: params.get('url') || PRODUCT_DEFAULT.url,
-};
-$('#productTitle').textContent = PRODUCT.title;
-$('#productPrice').textContent = '$' + Number(PRODUCT.price).toFixed(2);
-$('#productImage').src = PRODUCT.img;
-$('#productLink').href = PRODUCT.url;
+(function snow(){
+  const root = document.getElementById('snow'); if(!root) return;
+  const F = 140;
+  for(let i=0;i<F;i++){
+    const s=document.createElement('i');
+    const size=1+Math.random()*2.2;
+    s.style.width=size+'px'; s.style.height=size+'px';
+    s.style.left=(Math.random()*100)+'vw';
+    const dur=12+Math.random()*16;
+    s.style.setProperty('--flake-dur', dur+'s');
+    s.style.animationDelay = (-Math.random()*dur)+'s';
+    root.appendChild(s);
+  }
+})();
 
-// JSON-LD
+const PRODUCT = {
+  title: 'Turkish Flag Car Air Freshener',
+  img: 'assets/products/1.jpg',
+  price: '19.99',
+  url: 'https://www.amazon.com/Turkish-Flag-Car-Air-Freshener/dp/B0FLLQCFZ5'
+};
+document.getElementById('productTitle').textContent = PRODUCT.title;
+document.getElementById('productPrice').textContent = '$ ' + Number(PRODUCT.price).toFixed(2);
+document.getElementById('productImage').src = PRODUCT.img;
+document.getElementById('productLink').href = PRODUCT.url;
+
 document.getElementById('product-schema').textContent = JSON.stringify({
   "@context":"https://schema.org",
   "@type":"Product",
@@ -101,19 +94,3 @@ document.getElementById('product-schema').textContent = JSON.stringify({
   "brand":{"@type":"Organization","name":"Dede Global LLC"},
   "offers":{"@type":"Offer","priceCurrency":"USD","price":String(Number(PRODUCT.price).toFixed(2)),"url":PRODUCT.url,"availability":"https://schema.org/InStock"}
 });
-
-// Snow effect
-(function snow(){
-  const root = document.getElementById('snow'); if(!root) return;
-  const F = 120;
-  for(let i=0;i<F;i++){
-    const s=document.createElement('i');
-    const size=Math.random()*2+1;
-    s.style.width=size+'px'; s.style.height=size+'px';
-    s.style.left=Math.random()*100+'vw';
-    const dur=10+Math.random()*14;
-    s.style.setProperty('--dur', dur+'s');
-    s.style.animationDelay = (-Math.random()*dur)+'s';
-    root.appendChild(s);
-  }
-})();
