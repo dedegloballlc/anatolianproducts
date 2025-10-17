@@ -31,3 +31,20 @@ main{min-height:100vh; display:grid; place-items:center; padding:64px 16px 76px}
 .btn:hover{filter:brightness(1.05)}
 .note{color:var(--muted); font-size:12px; margin:0}
 @media (max-width:480px){.title{font-size:18px}.price{font-size:16px}.btn{padding:8px 12px}.product-card{max-width:360px}}
+/* --- spacing & chip fixes --- */
+.track { gap: 12px; padding: 6px 10px; }
+.track > * { margin-right: 12px; }           /* gap fallback */
+.track > *:last-child { margin-right: 12px; } /* marquee kopyalarında sorun çıkarmaz */
+
+.flag-link { display:inline-flex; gap:8px; padding:6px 10px; }
+
+.clock {
+  display:inline-flex; align-items:center;
+  padding:6px 10px; margin-right:12px;
+  background:var(--chip); border:1px solid var(--chip-border);
+  border-radius:999px; white-space:nowrap; font-weight:500;
+}
+
+/* media alanı güvenli görüntülensin */
+.media{ aspect-ratio:4/3; background:#0f141a; overflow:hidden; }
+.product-media{ width:100%; height:100%; object-fit:cover; display:block; }
