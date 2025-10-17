@@ -90,3 +90,23 @@ main{min-height:100vh; display:grid; place-items:center; padding:64px 16px 76px}
 /* Üst/alt tüm marquee’lerde aralık yedeği */
 .track > a { margin-right: 12px !important; }
 .track > a:last-child { margin-right: 12px !important; }
+/* ===== FORCE FIX: Saat çipleri aralıklı ===== */
+.bar-bottom .track {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: center;
+  gap: 14px !important;
+}
+
+.bar-bottom .track a,
+#clocksTrack a {
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: 6px 12px !important;
+  margin-right: 14px !important;
+  background: var(--chip);
+  border: 1px solid var(--chip-border);
+  border-radius: 999px;
+  white-space: nowrap;
+  font-weight: 500;
+}
