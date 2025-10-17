@@ -1,112 +1,106 @@
+/* ========== Theme ========== */
 :root{
-  --bg:#0b0d10; --card:#141a20; --text:#d6dde5; --muted:#8b98a7;
-  --chip:#1b232c; --chip-border:#24303c; --accent:#2ea6ff;
-  --rim:14px; --shadow:0 10px 30px rgba(0,0,0,.35); --dur:35s;
+  --bg:#0b0d10;           /* arka plan */
+  --card:#141a20;         /* kart */
+  --text:#d6dde5;         /* metin */
+  --muted:#8b98a7;        /* ikincil metin */
+  --chip:#1b232c;         /* chip arka plan */
+  --chip-border:#24303c;  /* chip kenar */
+  --accent:#2ea6ff;       /* vurgu */
+  --rim:14px;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+  --dur:35s;              /* marquee hızı */
 }
-*{box-sizing:border-box} html,body{height:100%} html{scroll-behavior:smooth}
-body{margin:0; color:var(--text); font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-  background: radial-gradient(900px 520px at 12% -8%, #151b22 0, transparent 60%), radial-gradient(900px 520px at 90% -10%, #10151b 0, transparent 60%), var(--bg)}
-@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important; animation-iteration-count:1!important; transition:none!important}}
+
+/* ========== Reset ========== */
+*{box-sizing:border-box}
+html,body{height:100%}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  color:var(--text);
+  font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+  background:
+    radial-gradient(900px 520px at 12% -8%, #151b22 0, transparent 60%),
+    radial-gradient(900px 520px at 90% -10%, #10151b 0, transparent 60%),
+    var(--bg);
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition:none!important}
+}
+
+/* ========== Snow ========== */
 #snow{position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:0}
-#snow i{position:absolute; top:-10px; background:#fff; border-radius:50%; opacity:.9; animation:fall var(--flake-dur,15s) linear infinite}
+#snow i{position:absolute; top:-10px; width:2px; height:2px; background:#fff; border-radius:50%; opacity:.9; animation:fall var(--flake-dur,15s) linear infinite}
 @keyframes fall{to{transform:translate3d(0,110vh,0)}}
-.bar{position:sticky; top:0; z-index:2; background:rgba(17,21,26,.6); backdrop-filter:saturate(120%) blur(6px); border-bottom:1px solid #1e2731}
-.bar-bottom{position:fixed; bottom:0; top:auto; border-top:1px solid #1e2731; border-bottom:none}
-.track{display:flex; gap:8px; padding:6px 8px; min-height:34px; overflow:hidden; mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
-.track a{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; background:var(--chip); border:1px solid var(--chip-border); border-radius:999px; color:var(--text); text-decoration:none; white-space:nowrap; font-weight:500; transition:transform .15s ease, filter .15s ease}
+
+/* ========== Marquees (üst/alt şeritler) ========== */
+.bar{position:sticky; top:0; z-index:5; background:rgba(17,21,26,.6); backdrop-filter:saturate(120%) blur(6px); border-bottom:1px solid #1e2731}
+.bar-bottom{position:fixed; bottom:0; top:auto; z-index:5; border-top:1px solid #1e2731; background:rgba(17,21,26,.6); backdrop-filter:saturate(120%) blur(6px)}
+
+.track{
+  display:flex; align-items:center;
+  gap:12px;                   /* modern tarayıcılar */
+  padding:6px 10px; min-height:36px; overflow:hidden;
+  mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)
+}
+.track a, .flag-link, .clock{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:6px 10px; white-space:nowrap; font-weight:500;
+  background:var(--chip); border:1px solid var(--chip-border); border-radius:999px;
+  color:var(--text); text-decoration:none; transition:transform .15s ease,filter .15s ease
+}
 .track a:hover{transform:translateY(-1px); filter:brightness(1.08)}
+
+/* Marquee animasyonu */
 .track>*{animation:scroll var(--dur) linear infinite}
 .track>*:nth-child(odd){animation-delay:calc(var(--dur)/-2)}
 @keyframes scroll{from{transform:translateX(0)} to{transform:translateX(-50%)}}
-main{min-height:100vh; display:grid; place-items:center; padding:64px 16px 76px}
-.product-wrap{display:grid; place-items:center; width:100%; padding:24px 12px; z-index:1}
-.product-card{width:min(420px,92vw); background:var(--card); border:1px solid #1e2731; border-radius:var(--rim); box-shadow:var(--shadow); overflow:hidden}
+
+/* Gap fallback (bazı eski Chromium sürümleri için) */
+.track > *{margin-right:12px}
+.track > *:last-child{margin-right:12px}
+
+/* Saat şeridi özel: gap’ı zorla */
+#clocksTrack{display:flex!important; align-items:center; gap:12px}
+#clocksTrack > a{margin-right:12px!important}
+
+/* ========== Ana düzen ========== */
+main{min-height:100vh; display:grid; place-items:center; padding:64px 16px 76px; position:relative; z-index:1}
+
+.product-wrap{display:grid; place-items:center; width:100%; padding:24px 12px}
+
+/* Kart: kompakt ve merkezde */
+.product-card{
+  width:min(420px,92vw);
+  background:var(--card);
+  border:1px solid #1e2731; border-radius:var(--rim);
+  box-shadow:var(--shadow); overflow:hidden
+}
+
+/* Media alanı: 4:3 oran ve kırpma */
 .media-frame{width:100%; aspect-ratio:4/3; background:#0f141a; overflow:hidden}
 .product-media{width:100%; height:100%; object-fit:cover; display:block}
+
+/* Metinler ve CTA */
 .body{padding:16px 16px 14px}
 .title{font-size:20px; margin:0 0 8px}
 .price-row{display:flex; gap:12px; align-items:center; margin:8px 0 10px}
 .price{font-weight:700; font-size:18px}
-.btn{margin-left:auto; background:linear-gradient(180deg,#ffd38a,#ffb13b); color:#1b1200; font-weight:700; border-radius:10px; padding:9px 14px; text-decoration:none; border:1px solid #ec9a23; box-shadow:0 2px 0 #d48312 inset, 0 8px 20px rgba(0,0,0,.35)}
+.btn{
+  margin-left:auto; background:linear-gradient(180deg,#ffd38a,#ffb13b);
+  color:#1b1200; font-weight:700; border-radius:10px; padding:9px 14px;
+  text-decoration:none; border:1px solid #ec9a23;
+  box-shadow:0 2px 0 #d48312 inset, 0 8px 20px rgba(0,0,0,.35)
+}
 .btn:hover{filter:brightness(1.05)}
 .note{color:var(--muted); font-size:12px; margin:0}
-@media (max-width:480px){.title{font-size:18px}.price{font-size:16px}.btn{padding:8px 12px}.product-card{max-width:360px}}
-/* --- spacing & chip fixes --- */
-.track { gap: 12px; padding: 6px 10px; }
-.track > * { margin-right: 12px; }           /* gap fallback */
-.track > *:last-child { margin-right: 12px; } /* marquee kopyalarında sorun çıkarmaz */
 
-.flag-link { display:inline-flex; gap:8px; padding:6px 10px; }
-
-.clock {
-  display:inline-flex; align-items:center;
-  padding:6px 10px; margin-right:12px;
-  background:var(--chip); border:1px solid var(--chip-border);
-  border-radius:999px; white-space:nowrap; font-weight:500;
-}
-
-/* media alanı güvenli görüntülensin */
-.media{ aspect-ratio:4/3; background:#0f141a; overflow:hidden; }
-.product-media{ width:100%; height:100%; object-fit:cover; display:block; }
-/* Clock chip'leri açık aralıklı olsun */
-#clocksTrack {               /* alt şerit */
-  display: flex;
-  align-items: center;
-  gap: 12px;                 /* modern tarayıcılar için */
-}
-
-#clocksTrack .clock {        /* her saat chip'i */
-  display: inline-flex;
-  align-items: center;
-  padding: 6px 10px;
-  background: var(--chip);
-  border: 1px solid var(--chip-border);
-  border-radius: 999px;
-  white-space: nowrap;
-  font-weight: 500;
-}
-
-/* gap çalışmazsa yedek: kardeşler arası boşluk */
-#clocksTrack .clock + .clock { margin-left: 12px; }
-/* ---- FIX: Saat çipleri aralıklı ---- */
-#clocksTrack {                       /* alt marquee konteyner */
-  display: flex !important;
-  align-items: center;
-  gap: 12px;                         /* modern tarayıcılar */
-}
-
-#clocksTrack > a.clock {             /* her saat çipi */
-  display: inline-flex;
-  align-items: center;
-  padding: 6px 10px;
-  background: var(--chip);
-  border: 1px solid var(--chip-border);
-  border-radius: 999px;
-  white-space: nowrap;
-  font-weight: 500;
-  margin-right: 12px !important;     /* gap yoksa yedek */
-}
-
-/* Üst/alt tüm marquee’lerde aralık yedeği */
-.track > a { margin-right: 12px !important; }
-.track > a:last-child { margin-right: 12px !important; }
-/* ===== FORCE FIX: Saat çipleri aralıklı ===== */
-.bar-bottom .track {
-  display: flex !important;
-  flex-wrap: nowrap !important;
-  align-items: center;
-  gap: 14px !important;
-}
-
-.bar-bottom .track a,
-#clocksTrack a {
-  display: inline-flex !important;
-  align-items: center !important;
-  padding: 6px 12px !important;
-  margin-right: 14px !important;
-  background: var(--chip);
-  border: 1px solid var(--chip-border);
-  border-radius: 999px;
-  white-space: nowrap;
-  font-weight: 500;
+/* ========== Küçük ekran ========== */
+@media (max-width:480px){
+  .product-card{width:min(360px,94vw)}
+  .title{font-size:18px}
+  .price{font-size:16px}
+  .btn{padding:8px 12px}
+  .track{min-height:34px}
 }
