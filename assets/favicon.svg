@@ -1,0 +1,8 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
+  <rect width='64' height='64' rx='12' fill='#0b0f14'/>
+  <g fill='none' stroke='#8ab4f8' stroke-width='4'>
+    <path d='M10 42C18 30 30 30 38 42'/>
+    <path d='M26 22a10 10 0 1 0 0.01 0'/>
+  </g>
+  <text x='32' y='50' font-family='system-ui,Segoe UI,Roboto' font-size='10' text-anchor='middle' fill='#e6eef7'>DEDE</text>
+</svg>
