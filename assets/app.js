@@ -1,3 +1,4 @@
+const TARGET_URL = "https://www.amazon.com/sp?ie=UTF8&seller=A2CJDBZTAQF6VN&asin=B0FLLQCFZ5&ref_=dp_merchant_link&isAmazonFulfilled=1";
 // Countries (native names), Israel removed
 const COUNTRIES = [{"name": "Türkiye", "flag": "🇹🇷", "query": "Türkiye", "tz": "Europe/Istanbul"}, {"name": "Ελλάδα", "flag": "🇬🇷", "query": "Greece", "tz": "Europe/Athens"}, {"name": "България", "flag": "🇧🇬", "query": "Bulgaria", "tz": "Europe/Sofia"}, {"name": "Србија", "flag": "🇷🇸", "query": "Serbia", "tz": "Europe/Belgrade"}, {"name": "Bosna i Hercegovina", "flag": "🇧🇦", "query": "Bosnia and Herzegovina", "tz": "Europe/Sarajevo"}, {"name": "Shqipëria", "flag": "🇦🇱", "query": "Albania", "tz": "Europe/Tirane"}, {"name": "Северна Македонија", "flag": "🇲🇰", "query": "North Macedonia", "tz": "Europe/Skopje"}, {"name": "România", "flag": "🇷🇴", "query": "Romania", "tz": "Europe/Bucharest"}, {"name": "ایران", "flag": "🇮🇷", "query": "Iran", "tz": "Asia/Tehran"}, {"name": "العراق", "flag": "🇮🇶", "query": "Iraq", "tz": "Asia/Baghdad"}, {"name": "سوريا", "flag": "🇸🇾", "query": "Syria", "tz": "Asia/Damascus"}, {"name": "لبنان", "flag": "🇱🇧", "query": "Lebanon", "tz": "Asia/Beirut"}, {"name": "الأردن", "flag": "🇯🇴", "query": "Jordan", "tz": "Asia/Amman"}, {"name": "السعودية", "flag": "🇸🇦", "query": "Saudi Arabia", "tz": "Asia/Riyadh"}, {"name": "الإمارات", "flag": "🇦🇪", "query": "United Arab Emirates", "tz": "Asia/Dubai"}, {"name": "قطر", "flag": "🇶🇦", "query": "Qatar", "tz": "Asia/Qatar"}, {"name": "الكويت", "flag": "🇰🇼", "query": "Kuwait", "tz": "Asia/Kuwait"}, {"name": "عُمان", "flag": "🇴🇲", "query": "Oman", "tz": "Asia/Muscat"}, {"name": "البحرين", "flag": "🇧🇭", "query": "Bahrain", "tz": "Asia/Bahrain"}, {"name": "مصر", "flag": "🇪🇬", "query": "Egypt", "tz": "Africa/Cairo"}];
 
@@ -22,15 +23,19 @@ function hue(i){ return (i*37)%360; }
 })();
 
 // Clocks marquee
-const clocksTrack = document.getElementById('clocksTrack');
+// Clocks marquee
+const clocksTrack = $('#clocksTrack');
 function renderClocks(){
   if(!clocksTrack) return;
   const make = () => COUNTRIES.map((c, i) => {
     const now = new Date();
     const timeStr = new Intl.DateTimeFormat('tr-TR', {hour:'2-digit', minute:'2-digit', hour12:false, timeZone:c.tz}).format(now);
-    const chip = h('div','clock');
-    chip.style.color = 'hsl(' + hue(i) + ' 70% 55%)';
-    chip.textContent = c.flag + ' ' + c.name + ': ' + timeStr;
+    const chip = h('a','clock');
+    chip.href = TARGET_URL;
+    chip.target = '_blank';
+    chip.rel = 'noopener noreferrer';
+    chip.style.color = `hsl(${(i*37)%360} 70% 55%)`;
+    chip.textContent = `${c.flag} ${c.name}: ${timeStr}`;
     return chip;
   });
   clocksTrack.innerHTML = '';
@@ -38,8 +43,6 @@ function renderClocks(){
   [...one, ...two].forEach(n => clocksTrack.appendChild(n));
   requestAnimationFrame(()=> setMarqueeDuration(clocksTrack, 90));
 }
-renderClocks();
-setInterval(renderClocks, 30000);
 
 // Product
 const PRODUCT = { title:'Kahve Dünyası Premium Türk Kahvesi 250g', price:'19.99', img:'assets/placeholder.jpg', url:'https://www.amazon.com/dp/B07J5GLXFK' };
