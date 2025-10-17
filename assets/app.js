@@ -75,22 +75,47 @@ setInterval(renderClocks, 30000);
   }
 })();
 
-const PRODUCT = {
-  title: 'Turkish Flag Car Air Freshener',
-  img: 'assets/products/1.jpg',
-  price: '19.99',
-  url: 'https://www.amazon.com/Turkish-Flag-Car-Air-Freshener/dp/B0FLLQCFZ5'
-};
-document.getElementById('productTitle').textContent = PRODUCT.title;
-document.getElementById('productPrice').textContent = '$ ' + Number(PRODUCT.price).toFixed(2);
-document.getElementById('productImage').src = PRODUCT.img;
-document.getElementById('productLink').href = PRODUCT.url;
+// === Products carousel (10s) ===
+const PRODUCTS = [
+  {
+    title: 'Turkish Flag Car Air Freshener',
+    img: 'assets/products/1.jpg',
+    price: '19.99',
+    url: 'https://www.amazon.com/Turkish-Flag-Car-Air-Freshener/dp/B0FLLQCFZ5'
+  },
+  {
+    title: 'California Car Air Freshener 3-Pack',
+    img: 'assets/products/2.jpg',
+    price: '12.95',
+    url: 'https://www.amazon.com/California-Car-Air-Freshener-3-Pack/dp/B0FLMFL2YG'
+  },
+  {
+    title: 'Islamic Air Freshener — Allah & Muhammad',
+    img: 'assets/products/43242.jpg',
+    price: '9.99',
+    url: 'https://www.amazon.com/Islamic-Freshener-Muhammad-Calligraphy-Double-Sided/dp/B0FLMQMFB1'
+  }
+];
 
-document.getElementById('product-schema').textContent = JSON.stringify({
-  "@context":"https://schema.org",
-  "@type":"Product",
-  "name": PRODUCT.title,
-  "image":[PRODUCT.img],
-  "brand":{"@type":"Organization","name":"Dede Global LLC"},
-  "offers":{"@type":"Offer","priceCurrency":"USD","price":String(Number(PRODUCT.price).toFixed(2)),"url":PRODUCT.url,"availability":"https://schema.org/InStock"}
+let pIndex = 0;
+function showProduct(i){
+  const p = PRODUCTS[i];
+  const $ = s => document.querySelector(s);
+  $('#productTitle').textContent = p.title;
+  $('#productPrice').textContent = '$' + Number(p.price).toFixed(2);
+  $('#productImage').src = p.img;
+  $('#productLink').href = p.url;
+
+  // JSON-LD güncelle
+  document.getElementById('product-schema').textContent = JSON.stringify({
+    "@context":"https://schema.org",
+    "@type":"Product",
+    "name": p.title,
+    "image":[p.img],
+    "brand":{"@type":"Organization","name":"Dede Global LLC"},
+    "offers":{"@type":"Offer","priceCurrency":"USD","price":String(Number(p.price).toFixed(2)),"url":p.url,"availability":"https://schema.org/InStock"}
+  });
+}
+showProduct(pIndex);
+setInterval(()=>{ pIndex = (pIndex+1) % PRODUCTS.length; showProduct(pIndex); }, 10000);
 });
