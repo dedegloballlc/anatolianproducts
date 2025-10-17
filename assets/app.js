@@ -143,3 +143,14 @@ PRODUCTS.forEach(p => {
   a.target = '_blank';
   a.rel = 'noopener noreferrer';
   a.className = '
+// Tek ürün bağlantısı
+const PRODUCT = {
+  title: 'Turkish Flag Car Air Freshener',
+  img: 'assets/products/1.jpg',
+  url: 'https://www.amazon.com/Turkish-Flag-Car-Air-Freshener/dp/B0FLLQCFZ5'
+};
+
+// Mevcut HTML alanlarını doldur
+document.getElementById('productImage').src = PRODUCT.img;
+document.getElementById('productImage').alt = PRODUCT.title;
+document.getElementById('product').onclick = () => window.open(PRODUCT.url, '_blank');
