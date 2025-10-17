@@ -1,9 +1,8 @@
 {
-  "name": "Anatolian Products — Dede Global LLC",
+  "name": "Anatolian Products",
   "short_name": "Anatolian",
   "start_url": ".",
   "display": "standalone",
-  "background_color": "#0b0f14",
-  "theme_color": "#0b0f14",
-  "icons": []
+  "background_color": "#0a0d12",
+  "theme_color": "#0a0d12"
 }

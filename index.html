@@ -3,77 +3,34 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Anatolian Products — Dede Global LLC</title>
-  <meta name="description" content="Ortadoğu, Balkan ve Türkiye'den seçili ürünlere yönlendiren tek ürün vitrin sayfası. Bayraklar, canlı saatler, tek tıkla Amazon bağlantısı." />
+  <title>Anatolian Products</title>
+  <meta name="description" content="Ortadoğu, Balkan ve Türkiye'den seçili ürünlere yönlendiren tek ürün vitrin sayfası." />
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#0b0f14" />
-  <!-- OpenGraph / Twitter -->
-  <meta property="og:title" content="Anatolian Products — Dede Global LLC" />
-  <meta property="og:description" content="Seçili ürün. Canlı saatler. Bayraklar. Tek tık Amazon." />
-  <meta property="og:image" content="assets/share.jpg" />
-  <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <!-- Preload -->
-  <link rel="preload" href="assets/styles.css?v=3" as="style">
-  <link rel="stylesheet" href="assets/styles.css?v=3">
-  <script>
-    // Light/Dark auto with prefers-color-scheme (optional)
-    try{document.documentElement.dataset.theme = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';}catch(e){}
-  </script>
+  <meta name="theme-color" content="#0a0d12" />
+  <link rel="preload" href="assets/styles.css?v=5" as="style">
+  <link rel="stylesheet" href="assets/styles.css?v=5">
   <script type="application/ld+json" id="product-schema"></script>
 </head>
 <body>
   <div class="snow" id="snow"></div>
-
-  <header>
-    <div class="bar">
-      <div class="brand">Dede Global LLC</div>
-      <div class="controls">
-        <button id="toggleSnow" class="btn small" aria-pressed="true" title="Karı aç/kapat">❄︎</button>
-      </div>
-    </div>
-    <!-- Marquee flags -->
-    <div class="marquee">
-      <div class="track" id="flagsTrack"></div>
-    </div>
-  </header>
-
+  <header><div class="marquee top"><div class="track" id="flagsTrack"></div></div></header>
   <main>
-    <section class="product-card" id="product" aria-label="Seçili ürün">
-      <img id="productImage" class="product-media" alt="Ürün görseli" loading="lazy" />
-      <div class="product-body">
-        <h1 id="productTitle" class="product-title"></h1>
-        <p id="productPrice" class="product-price"></p>
-        <div class="product-actions">
-          <a id="productLink" class="btn" target="_blank" rel="noopener noreferrer" aria-label="Amazon'da ürünü aç">Amazon'da Gör</a>
+    <section class="product-wrap">
+      <article class="product-card" id="product">
+        <div class="media-frame"><img id="productImage" class="product-media" alt="Ürün görseli" loading="lazy" /></div>
+        <div class="product-body">
+          <h1 id="productTitle" class="product-title"></h1>
+          <div class="price-line">
+            <span id="productPrice" class="product-price"></span>
+            <a id="productLink" class="btn" target="_blank" rel="noopener noreferrer">Amazon'da Gör</a>
+          </div>
+          <p class="muted note">Fiyat URL parametresi veya sabit ile gösterilir. Amazon canlı fiyatı için resmi API gerekir.</p>
         </div>
-        <p class="muted note">Fiyat URL parametresi veya sabit ile gösterilir. Amazon canlı fiyatı için resmi API gerekir.</p>
-      </div>
+      </article>
     </section>
-
-    <details>
-      <summary>⚙️ Hızlı kurulum • Quick setup</summary>
-      <div class="help">
-        <p>URL parametreleri: <code>?title=Ad&price=24.90&img=IMG_URL&url=AMAZON_LINK</code></p>
-        <p>Varsayılanlar <code>assets/app.js</code> → <code>PRODUCT</code>.</p>
-        <p>Admin parametreleri: <code>&snow=0</code> (kar kapalı), <code>&speedFlags=90</code>, <code>&speedClocks=70</code>.</p>
-      </div>
-      <noscript style="color:#f88">Bu site JavaScript gerektirir.</noscript>
-    </details>
   </main>
-
-  <footer>
-    <div class="marquee thin" aria-label="Canlı saatler">
-      <div class="track" id="clocksTrack"></div>
-    </div>
-  </footer>
-
-  <script src="assets/app.js?v=3" defer></script>
-  <script>
-    if('serviceWorker' in navigator){
-      window.addEventListener('load', ()=> navigator.serviceWorker.register('/sw.js').catch(()=>{}));
-    }
-  </script>
+  <footer><div class="marquee thin"><div class="track" id="clocksTrack"></div></div></footer>
+  <script src="assets/app.js?v=5" defer></script>
 </body>
 </html>
