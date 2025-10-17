@@ -1,8 +1,6 @@
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
-  <rect width='64' height='64' rx='12' fill='#0b0f14'/>
-  <g fill='none' stroke='#8ab4f8' stroke-width='4'>
-    <path d='M10 42C18 30 30 30 38 42'/>
-    <path d='M26 22a10 10 0 1 0 0.01 0'/>
-  </g>
-  <text x='32' y='50' font-family='system-ui,Segoe UI,Roboto' font-size='10' text-anchor='middle' fill='#e6eef7'>DEDE</text>
+  <defs><linearGradient id='g' x1='0' x2='1'><stop stop-color='#7cc0ff'/><stop offset='1' stop-color='#a1b8ff'/></linearGradient></defs>
+  <rect width='64' height='64' rx='14' fill='#0a0d12'/>
+  <path d='M10 40 Q22 26 32 36 T54 40' fill='none' stroke='url(#g)' stroke-width='4' stroke-linecap='round'/>
+  <circle cx='32' cy='24' r='8' fill='none' stroke='url(#g)' stroke-width='4'/>
 </svg>
