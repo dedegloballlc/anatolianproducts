@@ -1,32 +1,43 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Anatolian Products</title>
-  <meta name="description" content="Ortadoğu, Balkan ve Türkiye'den seçili ürünlere yönlendiren tek ürün vitrin sayfası." />
-  <link rel="icon" href="assets/favicon.svg">
-  <meta name="theme-color" content="#0a0a0a" />
-  <link rel="stylesheet" href="assets/styles.css?v=9" />
+  <meta name="description" content="Orta Doğu ve Anadolu'dan seçili tek ürün için vitrin sayfası." />
+  <meta name="theme-color" content="#0b0d10" />
+  <link rel="icon" href="assets/favicon.svg" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="assets/styles.css?v=1" />
   <script type="application/ld+json" id="product-schema">{}</script>
 </head>
 <body>
   <div id="snow"></div>
-  <header class="marquee top"><div class="track" id="flagsTrack"></div></header>
+
+  <header class="bar">
+    <div id="flagsTrack" class="track"></div>
+  </header>
+
   <main>
-    <section class="product-wrap">
-      <article class="product-card" id="product">
-        <div class="media-frame"><img id="productImage" class="product-media" alt="Ürün görseli" loading="lazy" /></div>
-        <div class="product-body">
-          <h1 id="productTitle" class="product-title"></h1>
-          <div class="price-line"><span id="productPrice" class="product-price"></span></div>
+    <article class="card">
+      <div class="media">
+        <img id="productImage" alt="Ürün görseli" loading="lazy" />
+      </div>
+      <div class="body">
+        <h1 id="productTitle" class="title"></h1>
+        <div class="price-row">
+          <span id="productPrice" class="price"></span>
           <a id="productLink" class="btn" target="_blank" rel="noopener noreferrer">Amazon'da Gör</a>
-          <p class="muted note">Fiyat URL parametresi veya sabit ile gösterilir. Amazon canlı fiyatı için resmi API gerekir.</p>
         </div>
-      </article>
-    </section>
+        <p class="note">Not: Canlı Amazon fiyatları için resmi API gerekir. Bu sürüm sabit fiyat gösterir.</p>
+      </div>
+    </article>
   </main>
-  <footer class="marquee"><div class="track" id="clocksTrack"></div></footer>
-  <script src="assets/app.js?v=19" defer></script>
+
+  <footer class="bar bar-bottom">
+    <div id="clocksTrack" class="track"></div>
+  </footer>
+
+  <script src="assets/app.js?v=1" defer></script>
 </body>
 </html>
