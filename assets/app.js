@@ -115,3 +115,31 @@ document.getElementById('product-schema').textContent = JSON.stringify({
     root.appendChild(s);
   }
 })();
+// --- PRODUCTS LIST ---
+const PRODUCTS = [
+  {
+    title: 'Turkish Flag Car Air Freshener',
+    img: 'assets/products/1.jpg',
+    url: 'https://www.amazon.com/Turkish-Flag-Car-Air-Freshener/dp/B0FLLQCFZ5'
+  },
+  {
+    title: 'California Car Air Freshener 3-Pack',
+    img: 'assets/products/2.jpg',
+    url: 'https://www.amazon.com/California-Car-Air-Freshener-3-Pack/dp/B0FLMFL2YG'
+  },
+  {
+    title: 'Islamic Freshener — Allah & Muhammad',
+    img: 'assets/products/43242.jpg',
+    url: 'https://www.amazon.com/Islamic-Freshener-Muhammad-Calligraphy-Double-Sided/dp/B0FLMQMFB1'
+  }
+];
+
+// ürünleri listele
+const wrap = document.querySelector('.product-wrap');
+wrap.innerHTML = '';
+PRODUCTS.forEach(p => {
+  const a = document.createElement('a');
+  a.href = p.url;
+  a.target = '_blank';
+  a.rel = 'noopener noreferrer';
+  a.className = '
