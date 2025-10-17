@@ -68,3 +68,25 @@ main{min-height:100vh; display:grid; place-items:center; padding:64px 16px 76px}
 
 /* gap çalışmazsa yedek: kardeşler arası boşluk */
 #clocksTrack .clock + .clock { margin-left: 12px; }
+/* ---- FIX: Saat çipleri aralıklı ---- */
+#clocksTrack {                       /* alt marquee konteyner */
+  display: flex !important;
+  align-items: center;
+  gap: 12px;                         /* modern tarayıcılar */
+}
+
+#clocksTrack > a.clock {             /* her saat çipi */
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  background: var(--chip);
+  border: 1px solid var(--chip-border);
+  border-radius: 999px;
+  white-space: nowrap;
+  font-weight: 500;
+  margin-right: 12px !important;     /* gap yoksa yedek */
+}
+
+/* Üst/alt tüm marquee’lerde aralık yedeği */
+.track > a { margin-right: 12px !important; }
+.track > a:last-child { margin-right: 12px !important; }
